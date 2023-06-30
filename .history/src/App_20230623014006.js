@@ -1,5 +1,6 @@
 import "./App.css";
-import { FilterableProductTable } from "./components/FilterableProductTable";
+import { SearchBar } from "./SearchBar";
+import { ProductTable } from "./components/ProductTable";
 
 const PRODUCTS = [
   { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
@@ -15,3 +16,12 @@ function App() {
 }
 
 export default App;
+
+function FilterableProductTable({ products }) {
+  return (
+    <div>
+      <SearchBar />
+      <ProductTable products={products} />
+    </div>
+  );
+}

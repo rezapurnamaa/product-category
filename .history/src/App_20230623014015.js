@@ -1,5 +1,5 @@
 import "./App.css";
-import { FilterableProductTable } from "./components/FilterableProductTable";
+import { FilterableProductTable } from "./FilterableProductTable";
 
 const PRODUCTS = [
   { category: "Fruits", price: "$1", stocked: true, name: "Apple" },
