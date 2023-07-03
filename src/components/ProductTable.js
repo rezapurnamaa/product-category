@@ -1,23 +1,20 @@
 import { ProductRow } from "./ProductRow";
 import { ProductCategoryRow } from "./ProductCategoryRow";
 
-export function ProductTable({ products }) {
+export function ProductTable({ products, filterText, inStockOnly }) {
   const rows = [];
   let lastCategory = null;
 
-  products.forEach((product) => {
-    if (product.category !== lastCategory) {
-      rows.push(
-        <ProductCategoryRow
-          key={product.category}
-          category={product.category}
-        />
-      );
-    }
-
-    rows.push(<ProductRow product={product} key={product.name} />);
-    lastCategory = product.category;
+  //filter product by name and stock availability
+  const filteredProducts = products.filter((product) => {
+    return (
+      product.name.toLowerCase().includes(filterText.toLowerCase()) &&
+      (inStockOnly ? product.stocked : true)
+    );
   });
+
+  console.log(filteredProducts);
+  generateProductTable(filteredProducts);
 
   return (
     <>
@@ -30,7 +27,22 @@ export function ProductTable({ products }) {
         </thead>
         <tbody>{rows}</tbody>
       </table>
-      <ProductCategoryRow />
     </>
   );
+
+  function generateProductTable(products) {
+    products.forEach((product) => {
+      if (product.category !== lastCategory) {
+        rows.push(
+          <ProductCategoryRow
+            key={product.category}
+            category={product.category}
+          />
+        );
+      }
+
+      rows.push(<ProductRow product={product} key={product.name} />);
+      lastCategory = product.category;
+    });
+  }
 }
